@@ -266,7 +266,7 @@ namespace cron
       inline std::tm to_tm(CRONCPP_STRING_VIEW time)
       {
          std::tm result;
-#if __cplusplus > 201103L
+#if __cplusplus > 201103L && !defined(_AIX)
          std::istringstream str(time.data());
          str.imbue(std::locale(setlocale(LC_ALL, nullptr)));
 
@@ -294,7 +294,7 @@ namespace cron
 
       inline std::string to_string(std::tm const & tm)
       {
-#if __cplusplus > 201103L
+#if __cplusplus > 201103L && !defined(_AIX)
          std::ostringstream str;
          str.imbue(std::locale(setlocale(LC_ALL, nullptr)));
          str << std::put_time(&tm, "%Y-%m-%d %H:%M:%S");
